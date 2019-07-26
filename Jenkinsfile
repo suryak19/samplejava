@@ -11,6 +11,7 @@ pipeline {
        stage("test") {
            steps {
                //snDevOpsStep '819ac72a1336bf408b49b2776144b0d0'
+               sh "mvn clean install"
                echo "Testing"
                sleep 3
            }
