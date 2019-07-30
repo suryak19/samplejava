@@ -1,6 +1,6 @@
 pipeline {
    agent any
-   stages {
+   stages12 {
        stage("build") {
            steps {
                //snDevOpsStep '099ac72a1336bf408b49b2776144b0d0'
