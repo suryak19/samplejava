@@ -22,7 +22,7 @@ pipeline {
        stage("deploy") {
            steps {
                snDevOpsStep 'd770eb90c7073300b8e302b827c260cb'
-               //snDevOpsChange()
+               snDevOpsChange()
                echo "Deploying"
                sleep 7
            }
