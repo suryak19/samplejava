@@ -6,14 +6,14 @@ pipeline {
    stages {
        stage("build") {
            steps {
-               snDevOpsStep '8d8a11c7dbbee300f16092dadb9619cb'
+               snDevOpsStep 'f6a381e4c7c33300b8e302b827c260f2'
                echo "Building"
                sleep 5
            }
        }
        stage("test") {
            steps {
-               snDevOpsStep '0d8a11c7dbbee300f16092dadb9619cb'
+               snDevOpsStep '76a381e4c7c33300b8e302b827c260f2'
                //sh "mvn clean install"
                echo "Testing"
                sleep 3
@@ -21,7 +21,7 @@ pipeline {
        }
        stage("deploy") {
            steps {
-               snDevOpsStep '86aa15c7dbbee300f16092dadb961985'
+               snDevOpsStep '7ea381e4c7c33300b8e302b827c260f1'
                snDevOpsChange()
                echo "Deploying"
                sleep 7
