@@ -14,7 +14,7 @@ pipeline {
        stage("test") {
            steps {
                snDevOpsStep 'ef70eb90c7073300b8e302b827c260cb'
-               sh "mvn clean install"
+               //sh "mvn clean install"
                echo "Testing"
                sleep 3
            }
@@ -31,7 +31,7 @@ pipeline {
    post {
       always {
          snDevOpsStep '6f70eb90c7073300b8e302b827c260cb'
-        junit '**/target/surefire-reports/*.xml'
+        //junit '**/target/surefire-reports/*.xml'
       }
    } 
 }
