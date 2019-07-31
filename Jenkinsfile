@@ -6,7 +6,7 @@ pipeline {
    stages {
        stage("build") {
            steps {
-               snDevOpsStep 'f6a381e4c7c33300b8e302b827c260f2'
+               snDevOpsStep '8d8a11c7dbbee300f16092dadb9619cb'
                echo "Building"
                sleep 5
            }
