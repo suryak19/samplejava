@@ -1,16 +1,16 @@
 pipeline {
    agent any
-   stages12 {
+   stages {
        stage("build") {
            steps {
-               snDevOpsStep '099ac72a1336bf408b49b2776144b0d0'
+               snDevOpsStep '6370eb90c7073300b8e302b827c260cc'
                echo "Building"
                sleep 5
            }
        }
        stage("test") {
            steps {
-               snDevOpsStep '819ac72a1336bf408b49b2776144b0d0'
+               snDevOpsStep 'ef70eb90c7073300b8e302b827c260cb'
                //sh "mvn clean install"
                echo "Testing"
                sleep 3
@@ -18,7 +18,7 @@ pipeline {
        }
        stage("deploy") {
            steps {
-               snDevOpsStep '899ac72a1336bf408b49b2776144b0d0'
+               snDevOpsStep 'd770eb90c7073300b8e302b827c260cb'
                //snDevOpsChange()
                echo "Deploying"
                sleep 7
