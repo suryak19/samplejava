@@ -31,11 +31,15 @@ pipeline {
                sleep 7
            }
        }
-   }
-   post {
-      always {
+      stage("Post-Build"){
          snDevOpsStep '8780be30c7c33300b8e302b827c26005'
          junit '**/target/surefire-reports/*.xml'
       }
-   } 
+   }
+   //post {
+     // always {
+       //  snDevOpsStep '8780be30c7c33300b8e302b827c26005'
+        // junit '**/target/surefire-reports/*.xml'
+      //}
+   //} 
 }
