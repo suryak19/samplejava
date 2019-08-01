@@ -34,7 +34,7 @@ pipeline {
    }
    post {
       always {
-         snDevOpsStep '6f70eb90c7073300b8e302b827c260cb'
+         snDevOpsStep '818a11c7dbbee300f16092dadb9619cb'
          junit '**/target/surefire-reports/*.xml'
       }
    } 
