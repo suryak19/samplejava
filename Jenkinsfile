@@ -3,6 +3,10 @@ pipeline {
     options {
         skipDefaultCheckout()
     }
+   tools {
+      maven "maven"
+   }
+   
    stages {
        stage("build") {
            steps {
