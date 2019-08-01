@@ -10,14 +10,14 @@ pipeline {
    stages {
        stage("build") {
            steps {
-               snDevOpsStep '8d8a11c7dbbee300f16092dadb9619cb'
+               snDevOpsStep '8b80be30c7c33300b8e302b827c26005'
                echo "Building"
                sleep 5
            }
        }
        stage("test1") {
            steps {
-               snDevOpsStep '0d8a11c7dbbee300f16092dadb9619cb'
+               snDevOpsStep '0b80be30c7c33300b8e302b827c26005'
                sh "mvn clean install"
                echo "Testing"
                sleep 3
@@ -25,7 +25,7 @@ pipeline {
        }
        stage("deploy") {
            steps {
-               snDevOpsStep '86aa15c7dbbee300f16092dadb961985'
+               snDevOpsStep '0380be30c7c33300b8e302b827c26005'
                snDevOpsChange()
                echo "Deploying"
                sleep 7
@@ -34,7 +34,7 @@ pipeline {
    }
    post {
       always {
-         snDevOpsStep '818a11c7dbbee300f16092dadb9619cb'
+         snDevOpsStep '8780be30c7c33300b8e302b827c26005'
          junit '**/target/surefire-reports/*.xml'
       }
    } 
