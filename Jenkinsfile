@@ -1,6 +1,6 @@
 node {
    stage("build") {
-       snDevOpsStep 'c237621ec7833300b8e302b827c26053'
+       snDevOpsStep '6d8cb103c7c33300b8e302b827c2603e'
       snDevOpsChange()   
    }
 }
