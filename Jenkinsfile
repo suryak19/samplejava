@@ -25,7 +25,7 @@ pipeline {
        stage("prod") {
            steps {
                snDevOpsStep '79d16550c7173300b8e302b827c260c3'
-              snDevopsChange()
+              snDevOpsChange()
                echo "production"
                sleep 7
            }
