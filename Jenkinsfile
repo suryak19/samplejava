@@ -1,16 +1,14 @@
-node {
-  stage("build") {
-      snDevOpsStep '80478221c7d33300b8e302b827c260b5'
-      echo "Building"
-      sh 'mvn clean install'
-
-  }
-  stage("test") {
-      snDevOpsStep '00478221c7d33300b8e302b827c260b5'
-      echo "Testing"
-      sh 'mvn test -Dpublish'
-
-      junit '**/target/surefire-reports/*.xml'
-  }
-
+@Library('shared-lib')_
+pipFunc() {
+    git 'http://admin@dnbpuls.sndevops.net:81/scm/dnbpul/dnb-web.git'
+    def mvn_version = 'Maven'
+    stage('compile') {
+        snDevOpsStep (stepSysId:'8cbb707adbbbb3003e87f5861d961908')
+        printBuildinfo {
+        	name = "Compiling..."
+        }
+        //withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+        	//sh 'mvn clean install -DskipTests'
+		}
+    }
 }
