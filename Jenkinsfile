@@ -9,6 +9,7 @@ pipFunc() {
         }
         //withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
         	//sh 'mvn clean install -DskipTests'
-		}
+		//}
     }
+	test()
 }
