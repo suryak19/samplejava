@@ -4,24 +4,24 @@ pipeline {
     //maven “Maven”
   //}
   stages {
-      stage(“build”) {
+      stage("build") {
           steps {
-            echo ‘build’
+            echo 'build'
               //snDevOpsStep()
             sleep 5
               //sh ‘mvn clean install’
           }
       }
-      stage(“test”) {
+      stage("test") {
            steps {
-             echo ‘test’
+             echo 'test'
                 //snDevOpsStep()
              sleep 5
                 sh 'mvn test -Dpublish'
                 junit '**/target/surefire-reports/*.xml'
            }
        }
-      stage(“deploy”) {
+      stage("deploy") {
           steps {
             echo 'Deploying..'
             //snDevOpsStep()
