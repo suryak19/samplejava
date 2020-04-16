@@ -1,15 +1,33 @@
-@Library('shared-lib')_
-pipFunc() {
-    git 'http://admin@dnbpuls.sndevops.net:81/scm/dnbpul/dnb-web.git'
-    def mvn_version = 'Maven'
-    stage('compiling') {
-        snDevOpsStep (stepSysId:'2736f1d0c70400108c2c02b827c26026')
-        printBuildinfo {
-        	name = "Compiling..."
-        }
-        //withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-        	//sh 'mvn clean install -DskipTests'
-		//}
-    }
-	test()
+pipeline {
+  agent any
+  tools {
+    maven “Maven”
+  }
+  stages {
+      stage(“build”) {
+          steps {
+            echo ‘build’
+              snDevOpsStep()
+            sleep 5
+              //sh ‘mvn clean install’
+          }
+      }
+      stage(“test”) {
+           steps {
+             echo ‘test’
+                snDevOpsStep()
+             sleep 5
+                sh ‘mvn test -Dpublish’
+                junit ‘**/target/surefire-reports/*.xml’
+           }
+       }
+      stage(“deploy”) {
+          steps {
+            echo ‘Deploying..’
+            snDevOpsStep()
+            sleep 5
+            snDevOpsChange()
+          }
+      }
+  }
 }
