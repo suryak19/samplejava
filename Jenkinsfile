@@ -27,7 +27,7 @@ pipeline {
             echo 'Prod'
             snDevOpsStep()
             sleep 5
-            //snDevOpsChange()
+            snDevOpsChange()
           }
       }
     
