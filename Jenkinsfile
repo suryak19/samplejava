@@ -21,6 +21,16 @@ pipeline {
                 junit '**/target/surefire-reports/*.xml'
            }
        }
+    
+     stage("prod") {
+          steps {
+            echo 'Prod'
+            snDevOpsStep()
+            sleep 5
+            //snDevOpsChange()
+          }
+      }
+    
       stage("deploy") {
           steps {
             echo 'Deploying..'
