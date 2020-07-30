@@ -7,7 +7,7 @@ pipeline {
       stage("build") {
           steps {
             echo 'build'
-              snDevOpsStep()
+              //snDevOpsStep()
             sleep 5
               //sh ‘mvn clean install’
           }
@@ -15,7 +15,7 @@ pipeline {
       stage("test1") {
            steps {
              echo 'test'
-                snDevOpsStep()
+                //snDevOpsStep()
              sleep 5
                 //sh 'mvn test -Dpublish'
                 //junit '**/target/surefire-reports/*.xml'
@@ -25,16 +25,16 @@ pipeline {
      stage("prod") {
           steps {
             echo 'Prod'
-            snDevOpsStep()
+            //snDevOpsStep()
             sleep 5
-            snDevOpsChange()
+            //snDevOpsChange()
           }
       }
     
       stage("deploy") {
           steps {
             echo 'Deploying..'
-            snDevOpsStep()
+            //snDevOpsStep()
             sleep 5
             //snDevOpsChange()
           }
