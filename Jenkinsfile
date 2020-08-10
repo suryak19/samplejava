@@ -5,14 +5,14 @@ pipeline {
         stage(‘build’) {
             steps {
                 echo ‘build …’
-                 //snDevOpsStep()
+                 snDevOpsStep()
                 sleep 5
             }
         }
         stage(‘test’) {
             steps {
                 echo ‘test …’
-                 //snDevOpsStep()
+                 snDevOpsStep()
                 sleep 5
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             }
             steps {
                  echo ‘dev branch deployment …’
-                 //snDevOpsStep()
+                 snDevOpsStep()
                 sleep 5
             }
         }
@@ -32,7 +32,7 @@ pipeline {
             }
             steps {
                 echo ‘prod branch deployment …’
-                 //snDevOpsStep()
+                 snDevOpsStep()
                 sleep 5
             }
         }
