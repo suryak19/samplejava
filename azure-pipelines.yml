@@ -17,7 +17,7 @@ stages:
           changeRegistration=$(curl -s -X POST https://devops.integration.user:devops@mohancli.service-now.com//api/sn_devops/v1/devops/orchestration/changeRegistration -H "Accept: application/json") 2>&1
           echo "${changeRegistration}"
           echo "$changeRegistration" | jq -r '.result.changeNumber'
-          changeNumber="$changeRegistration" | jq -r '.result.changeNumber'
+          changeNumber=$( echo jq -r  '.result.changeNumber' <<< "${changeRegistration}" ) 
           echo $changeNumber
           echo "##vso[task.setvariable variable=changeNumber;isOutput=true]$changeNumber"
 
