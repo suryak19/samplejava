@@ -9,12 +9,25 @@ stages:
       name: setvarStep
     - bash: echo $(setvarStep.myOutputVar)
       name: echovar
+    - task: Bash@3
+      name: ChangeRegistration
+      inputs:
+        targetType: 'inline'
+        script: |
+          changeRegistration=$(curl -s -X POST https://devops.integration.user:devops@mohancli.service-now.com//api/sn_devops/v1/devops/orchestration/changeRegistration -H "Accept: application/json") 2>&1
+          echo "${req}"
+          echo "$req" | jq -r '.result.changeNumber'
+          echo 'Hello world'
+          changeNumber =  jq '.result.changeNumber' $req
+          echo "$changeNumber"
+          
+          echo '##vso[task.setvariable variable=changeNumber;isOutput=true]$changeRegistration | jq -r '.result.changeNumber'
 
   # Map the variable from the job for the first slice
   - job: B
     dependsOn: A
     variables:
-      myVarFromDeploymentJob: $[ dependencies.A.outputs['setvarStep.myOutputVar'] ]
+      myVarFromDeploymentJob: $[ dependencies.A.outputs['ChangeRegistration.changeNumber'] ]
     steps:
     - bash: "echo $(myVarFromDeploymentJob)"
       name: echovar
