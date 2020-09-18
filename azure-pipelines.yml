@@ -5,10 +5,6 @@ stages:
   # Set an output variable from a deployment
   - job: A
     steps:
-    - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the deployment variable value"
-      name: setvarStep
-    - bash: echo $(setvarStep.myOutputVar)
-      name: echovar
     - task: Bash@3
       name: ChangeRegistration
       inputs:
@@ -17,14 +13,16 @@ stages:
           changeRegistration=$(curl -s -X POST https://devops.integration.user:devops@mohancli.service-now.com//api/sn_devops/v1/devops/orchestration/changeRegistration -H "Accept: application/json" | jq -r  '.result.changeNumber') 2>&1
           echo "${changeRegistration}"
           echo "##vso[task.setvariable variable=changeNumber;isOutput=true]$changeRegistration"
+    - bash: echo $(ChangeRegistration.changeNumber)
+      name: echovar
 
   # Map the variable from the job for the first slice
   - job: B
     dependsOn: A
     variables:
-      myVarFromDeploymentJob: $[ dependencies.A.outputs['ChangeRegistration.changeNumber'] ]
+      changeNumber: $[ dependencies.A.outputs['ChangeRegistration.changeNumber'] ]
     steps:
-    - bash: "echo $(myVarFromDeploymentJob)"
+    - bash: "echo $(changeNumber)"
       name: echovar
 
 - stage: Two
@@ -34,15 +32,15 @@ stages:
   - job: C
     variables:
       # map the output variable from A into this job
-      varFromA: $[ stageDependencies.One.A.outputs['setvarStep.myOutputVar'] ]
+      changeNumber: $[ stageDependencies.One.A.outputs['ChangeRegistration.changeNumber'] ]
     steps:
-    - script: echo $(varFromA)
+    - script: echo $(changeNumber)
 
   # Map the variable from the job for the first slice
   - job: D
     dependsOn: C
     variables:
-      myVarFromDeploymentJob: $[ stageDependencies.One.A.outputs['setvarStep.myOutputVar'] ]
+      changeNumber: $[ stageDependencies.One.A.outputs['ChangeRegistration.changeNumber'] ]
     steps:
-    - bash: "echo $(myVarFromDeploymentJob)"
+    - bash: "echo $(changeNumber)"
       name: echovar
