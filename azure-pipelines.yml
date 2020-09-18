@@ -14,7 +14,7 @@ stages:
   - job: B
     dependsOn: A
     variables:
-      myVarFromDeploymentJob: $[ dependencies.A.outputs['A.setvarStep.myOutputVar'] ]
+      myVarFromDeploymentJob: $[ stageDependencies.One.A.outputs['setvarStep.myOutputVar'] ]
     steps:
     - bash: "echo $(myVarFromDeploymentJob)"
       name: echovar
@@ -34,7 +34,7 @@ stages:
   - job: D
     dependsOn: C
     variables:
-      myVarFromDeploymentJob: $[ dependencies.A.outputs['A.setvarStep.myOutputVar'] ]
+      myVarFromDeploymentJob: $[ stageDependencies.One.A.outputs['setvarStep.myOutputVar'] ]
     steps:
     - bash: "echo $(myVarFromDeploymentJob)"
       name: echovar
