@@ -10,7 +10,7 @@ stages:
         targetType: 'inline'
         script: |
           SOMEVALUE="bleh"
-          echo "##vso[task.setvariable variable=someName;isOutput=true;]$SOMEVALUE"
+          echo "##vso[task.setvariable variable=someName;isOutput=true;]bleh"
           echo "variable value is $(someName)"
   - job: job_deploy_code
     displayName: Deploy Some Code
