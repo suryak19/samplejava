@@ -1,18 +1,40 @@
-jobs:
 
-# Set an output variable from a deployment
-- job: A
-  steps:
-  - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the deployment variable value"
-    name: setvarStep
-  - bash: echo $(setvarStep.myOutputVar)
-    name: echovar
+stages:
+- stage: One
+  jobs:
+  # Set an output variable from a deployment
+  - job: A
+    steps:
+    - bash: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the deployment variable value"
+      name: setvarStep
+    - bash: echo $(setvarStep.myOutputVar)
+      name: echovar
 
-# Map the variable from the job for the first slice
-- job: B
-  dependsOn: A
-  variables:
-    myVarFromDeploymentJob: $[ dependencies.A.outputs['A.setvarStep.myOutputVar'] ]
-  steps:
-  - bash: "echo $(myVarFromDeploymentJob)"
-    name: echovar
+  # Map the variable from the job for the first slice
+  - job: B
+    dependsOn: A
+    variables:
+      myVarFromDeploymentJob: $[ dependencies.A.outputs['A.setvarStep.myOutputVar'] ]
+    steps:
+    - bash: "echo $(myVarFromDeploymentJob)"
+      name: echovar
+
+- stage: Two
+  dependsOn: One
+  jobs:
+  # Set an output variable from a deployment
+  - job: C
+    variables:
+      # map the output variable from A into this job
+      varFromA: $[ stageDependencies.One.A.outputs['setvarStep.myOutputVar'] ]
+    steps:
+    - script: echo $(varFromA)
+
+  # Map the variable from the job for the first slice
+  - job: D
+    dependsOn: C
+    variables:
+      myVarFromDeploymentJob: $[ dependencies.A.outputs['A.setvarStep.myOutputVar'] ]
+    steps:
+    - bash: "echo $(myVarFromDeploymentJob)"
+      name: echovar
