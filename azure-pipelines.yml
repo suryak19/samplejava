@@ -15,10 +15,10 @@ stages:
         targetType: 'inline'
         script: |
           changeRegistration=$(curl -s -X POST https://devops.integration.user:devops@mohancli.service-now.com//api/sn_devops/v1/devops/orchestration/changeRegistration -H "Accept: application/json") 2>&1
-          echo "${req}"
-          echo "$req" | jq -r '.result.changeNumber'
+          echo "${changeRegistration}"
+          echo "$changeRegistration" | jq -r '.result.changeNumber'
           echo 'Hello world'
-          changeNumber =  jq '.result.changeNumber' $req
+          changeNumber =  jq '.result.changeNumber' $changeRegistration
           echo "$changeNumber"
           
           echo '##vso[task.setvariable variable=changeNumber;isOutput=true]$changeRegistration | jq -r '.result.changeNumber'
