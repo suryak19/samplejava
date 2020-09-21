@@ -15,7 +15,10 @@ stages:
           echo "##vso[task.setvariable variable=changeNumber;isOutput=true]$changeRegistration"
     - bash: echo $(ChangeRegistration.changeNumber)
       name: echovar
-
+    - task: ServiceNow-DevOps-Agent-Change-Registration@1
+      name: CustomChangeRegistration
+      inputs:
+        connectedServiceName: 'MohanCli'
   # Map the variable from the job for the first slice
   - job: B
     dependsOn: A
@@ -40,7 +43,7 @@ stages:
   - job: D
     dependsOn: C
     variables:
-      changeNumber: $[ stageDependencies.One.A.outputs['ChangeRegistration.changeNumber'] ]
+      changeNumber: $[ stageDependencies.One.A.outputs['CustomChangeRegistration.changeRegistrationResponse'] ]
     steps:
     - bash: "echo $(changeNumber)"
       name: echovar
