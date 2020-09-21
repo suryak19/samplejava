@@ -45,5 +45,5 @@ stages:
     variables:
       changeRegistrationResponse: $[ stageDependencies.One.A.outputs['CustomChangeRegistration.changeRegistrationResponse'] ]
     steps:
-    - bash: echo jq '.' $(changeRegistrationResponse)
+    - bash: echo "$(changeRegistrationResponse)" | jq .
       name: echovar
