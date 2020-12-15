@@ -6,14 +6,13 @@ pipeline {
             steps {
                 echo ‘build …’
                  snDevOpsStep()
-                sleep 5
+                 snDevOpsChange()
             }
         }
         stage(‘test’) {
             steps {
                 echo ‘test …’
                  snDevOpsStep()
-                sleep 5
             }
         }
         stage(‘Deploy for development’) {
@@ -23,7 +22,6 @@ pipeline {
             steps {
                  echo ‘dev branch deployment …’
                  snDevOpsStep()
-                sleep 5
             }
         }
         stage(‘Deploy for production’) {
@@ -33,7 +31,6 @@ pipeline {
             steps {
                 echo ‘prod branch deployment …’
                  snDevOpsStep()
-                sleep 5
             }
         }
     }
