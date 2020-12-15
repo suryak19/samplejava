@@ -2,34 +2,32 @@ pipeline {
   agent any
   
     stages {
-        stage(‘build’) {
+        stage('build') {
             steps {
-                echo ‘build …’
+                echo 'build …'
                  snDevOpsStep()
                  snDevOpsChange()
             }
         }
-        stage(‘test’) {
+        stage('test') {
             steps {
-                echo ‘test …’
+                echo 'test …'
                  snDevOpsStep()
             }
         }
-        stage(‘Deploy for development’) {
+        stage('Deploy for development') {
             when {
-                branch ‘development’
+                branch 'development'
             }
             steps {
-                 echo ‘dev branch deployment …’
                  snDevOpsStep()
             }
         }
-        stage(‘Deploy for production’) {
+        stage('Deploy for production') {
             when {
-                branch ‘production’
+                branch 'production'
             }
             steps {
-                echo ‘prod branch deployment …’
                  snDevOpsStep()
             }
         }
