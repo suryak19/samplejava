@@ -1,6 +1,8 @@
 pipeline {
   agent any
-  
+  options {
+    disableResume()
+  }
     stages {
         stage('build') {
             steps {
