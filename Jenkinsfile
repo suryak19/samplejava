@@ -7,7 +7,7 @@ pipeline {
         stage('build') {
             steps {
                 echo 'build …'
-                 snDevOpsStep()
+                 //snDevOpsStep()
                  snDevOpsChange()
             }
         }
