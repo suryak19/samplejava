@@ -14,7 +14,8 @@ pipeline {
         stage('test') {
             steps {
                 echo 'test …'
-                 snDevOpsStep()
+                 //snDevOpsStep()
+              snDevOpsChange()
             }
         }
         stage('Deploy for development') {
