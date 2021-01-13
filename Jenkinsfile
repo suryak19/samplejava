@@ -7,8 +7,8 @@ pipeline {
         stage('build') {
             steps {
                 echo 'build …'
-                curlCall()
-                 //snDevOpsStep()
+                //curlCall()
+                 snDevOpsStep()
                  snDevOpsChange()
             }
         }
