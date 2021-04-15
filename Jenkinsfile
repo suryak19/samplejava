@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo 'build …'
                 //curlCall()
-                 //snDevOpsStep()
+                 snDevOpsStep()
                  //snDevOpsChange()
             }
         }
