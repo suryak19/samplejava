@@ -8,15 +8,15 @@ pipeline {
             steps {
                 echo 'build …'
                 //curlCall()
-                 snDevOpsStep()
-                 snDevOpsChange()
+                 //snDevOpsStep()
+                 //snDevOpsChange()
             }
         }
         stage('test') {
             steps {
                 echo 'test …'
                  //snDevOpsStep()
-              snDevOpsChange()
+              //snDevOpsChange()
             }
         }
         stage('Deploy for development') {
