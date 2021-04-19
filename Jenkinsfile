@@ -1,49 +1,37 @@
+def artifactName = "ppm-jar" // also used for nexus filePath and artifactId attributes
+def artifactVersion = "5.${env.BUILD_NUMBER}"
+def artifactSemVersion = "${artifactVersion}.0"
+def repoName = "ppm-repo"
 pipeline {
-  agent any
-  //options {
-    //disableResume()
-  //}
-    stages {
-        stage('build') {
-            steps {
-                echo 'build …'
-                //curlCall()
-                 snDevOpsStep()
-                 //snDevOpsChange()
-            }
-        }
-        stage('test') {
-            steps {
-                echo 'test …'
-                 //snDevOpsStep()
-              //snDevOpsChange()
-            }
-        }
-        stage('Deploy for development') {
-            when {
-                branch 'development'
-            }
-            steps {
-                 snDevOpsStep()
-            }
-        }
-        stage('Deploy for production') {
-            when {
-                branch 'production'
-            }
-            steps {
-                 snDevOpsStep()
-            }
-        }
+    agent any
+    tools { 
+        maven 'Maven' 
     }
-
-}
-
-def curlCall(){
-               def jsonObj = [: ]
-               def json = new groovy.json.JsonBuilder(jsonObj)
-               def response = ["curl", "-k", "-X", "POST", "-H", "Content-Type: application/json", "-d", "", "http://devops.integration.user:devops@127.0.0.1:8082/api/sn_devops/v1/devops/tool/orchestration?toolType=jenkins&toolId=36a4417dc76120108c2c02b827c260b9"].execute()
-               response.waitFor()
-               println response.err.text
-               println response.text
+    stages {
+        stage('CI') {
+            steps {
+              echo 'running CI'
+              sh 'mvn compile'
+              sh 'mvn verify'
+        	}
+            post {
+                always {
+                    junit '**/target/surefire-reports/*.xml' 
+                }
+            }
+        }
+        stage('UAT deploy') {
+            steps {
+		            echo 'running UAT deploy'
+                sh 'mvn package'
+		            snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "${artifactName}","version":"${artifactVersion}","semanticVersion": "${artifactSemVersion}","repositoryName": "${repoName}"}]}""")
+	    	   }
+        }
+        stage('UAT test') {
+          	steps {
+                echo 'running UAT deploy'
+                snDevOpsChange()
+		        }
+        }
+	}
 }
