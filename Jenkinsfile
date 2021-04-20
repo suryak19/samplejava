@@ -17,13 +17,13 @@ pipeline {
                 }
             }
         }
-        /*stage('UAT deploy') {
+        stage('UAT deploy') {
             steps {
 		            echo 'running UAT deploy'
                 sh '/usr/local/bin/mvn package'
 		            snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "${artifactName}","version":"${artifactVersion}","semanticVersion": "${artifactSemVersion}","repositoryName": "${repoName}"}]}""")
 	    	   }
-        }
+        }/*
         stage('UAT test') {
           	steps {
                 echo 'running UAT deploy'
