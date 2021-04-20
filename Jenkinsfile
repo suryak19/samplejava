@@ -9,8 +9,8 @@ pipeline {
         stage('CI') {
             steps {
               echo 'running CI'
-              sh '/ust/local/bin/mvn compile'
-              sh '/ust/local/bin/mvn verify'
+              sh '/usr/local/bin/mvn compile'
+              sh '/usr/local/bin/mvn verify'
         	}
             post {
                 always {
@@ -21,7 +21,7 @@ pipeline {
         stage('UAT deploy') {
             steps {
 		            echo 'running UAT deploy'
-                sh '/ust/local/bin/mvn package'
+                sh '/usr/local/bin/mvn package'
 		            snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "${artifactName}","version":"${artifactVersion}","semanticVersion": "${artifactSemVersion}","repositoryName": "${repoName}"}]}""")
 	    	   }
         }
