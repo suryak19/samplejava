@@ -17,7 +17,7 @@ pipeline {
                 }
             }
         }
-        /*stage('UAT deploy') {
+        stage('UAT deploy') {
             steps {
 		            echo 'running UAT deploy'
                 sh '/usr/local/bin/mvn package'
@@ -29,6 +29,6 @@ pipeline {
                 echo 'running UAT deploy'
                 snDevOpsChange()
 		        }
-        }*/
+        }
 	}
 }
