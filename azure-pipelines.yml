@@ -13,7 +13,17 @@ stages:
           # changeRegistration=$(curl -s -X POST https://devops.integration.user:devops@mohancli.service-now.com//api/sn_devops/v1/devops/orchestration/changeRegistration -H "Accept: application/json" | jq -r  '.result.changeNumber') 2>&1
           # echo "${changeRegistration}"
           # echo "##vso[task.setvariable variable=changeNumber;isOutput=true]$changeRegistration"
-    - bash: pwd
+    # - bash: pwd
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
     #   name: echovar
     # - task: ServiceNow-DevOps-Agent-Change-Registration@1
     #   name: CustomChangeRegistration
