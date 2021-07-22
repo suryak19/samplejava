@@ -24,6 +24,11 @@ stages:
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'devops-artifact'
+        publishLocation: 'Container'
     #   name: echovar
     # - task: ServiceNow-DevOps-Agent-Change-Registration@1
     #   name: CustomChangeRegistration
