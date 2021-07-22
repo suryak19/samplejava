@@ -26,7 +26,8 @@ stages:
         sonarQubeRunAnalysis: false
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        # PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        PathtoPublish: '**/'
         ArtifactName: 'devops-artifact'
         publishLocation: 'Container'
     #   name: echovar
